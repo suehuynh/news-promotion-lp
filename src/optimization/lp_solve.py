@@ -13,7 +13,7 @@ def news_solver(
         avg_hrefs,
         lambda_tech=0.0,
         K=10,
-        other_lower_bound = 2,
+        other_lower_bound=2,
         solver_name="PULP_CBC_CMD",
         verbose=False
 ):

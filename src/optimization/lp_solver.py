@@ -76,6 +76,7 @@ def news_solver(
         i for i, var in x.items() if var.value() == 1
     ]
     return selected_indices, status
+
 def extended_news_solver(
         shares,
         lifestyle_indicator,

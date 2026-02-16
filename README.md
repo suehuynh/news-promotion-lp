@@ -12,8 +12,12 @@ This study addresses the following research question:
 > RQ: How much predicted engagement will be sacrificed to increase topical diversity in homepage article selection?
 
 ## 2.2 Dataset
-UCI Online News Popularity
-https://archive.ics.uci.edu/dataset/332/online+news+popularity
+This project uses the UCI Online News Popularity dataset, which is fetched 
+programmatically. No manual download required.
+```bash
+pip install ucimlrepo
+python scripts/preprocess_data.py  # Generates processed data
+```
 
 ## 2.3 Project Outline
 The project mirrors a real-world decision-support workflow in digital media platforms. I replicate a predictive–prescriptive pipeline as follow:
@@ -142,4 +146,5 @@ Future extensions may include:
 3. Dynamic (time-aware) article selection models.
 4. Personalized homepage optimization.
 5. Bayesian modeling of prediction uncertainty.
+
 

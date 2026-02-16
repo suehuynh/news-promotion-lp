@@ -8,7 +8,7 @@ data:
   dataset_id: 332
   test_size: 0.2
   random_state: 42
-  target_transform: "log_shares"  # log transformation of shares
+  target_transform: " log_shares"  # log transformation of shares
 
 preprocessing:
   scale_features: true

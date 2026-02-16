@@ -14,6 +14,7 @@ This study addresses the following research question:
 ## 2.2 Dataset
 This project uses the UCI Online News Popularity dataset, which is fetched 
 programmatically. No manual download required.
+
 ```bash
 pip install ucimlrepo
 python scripts/preprocess_data.py  # Generates processed data
@@ -146,5 +147,6 @@ Future extensions may include:
 3. Dynamic (time-aware) article selection models.
 4. Personalized homepage optimization.
 5. Bayesian modeling of prediction uncertainty.
+
 
 

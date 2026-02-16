@@ -2,7 +2,7 @@ import xgboost as xgb
 from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
 
-def train_xgb_model(
+def xgb_train(
     X_train,
     y_train,
     random_state=42
@@ -29,3 +29,4 @@ def train_xgb_model(
     model.fit(X_train, y_train)
   
     return model
+

@@ -1,0 +1,44 @@
+project:
+  name: "News Diversity ILP"
+  author: "Sue Huynh"
+  version: "1.0.0"
+
+data:
+  source: "UCI Online News Popularity"
+  dataset_id: 332
+  test_size: 0.2
+  random_state: 42
+  target_transform: "log_shares"  # log transformation of shares
+
+preprocessing:
+  scale_features: true
+  scaler_type: "standard" 
+
+model:
+  type: "XGBoost"
+  params:
+    objective: "reg:squarederror"
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+
+optimization:
+  K: 10  # number of articles to select
+  diversity_levels: [0, 1, 2, 3, 4, 5, 6, 7]  # for Pareto analysis
+  solver: "PULP_CBC_CMD"
+  solver_verbose: false
+
+experiments:
+  n_seeds: 10  # robustness analysis across random seeds
+  seeds: [42, 123, 456, 789, 1011, 1213, 1415, 1617, 1819, 2021]
+
+paths:
+  data_raw: "data/raw"
+  data_processed: "data/processed"
+  results: "results"
+  figures: "results/figures"
+  tables: "results/tables"
+  models: "models/saved"

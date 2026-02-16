@@ -44,7 +44,7 @@ def load_data() -> pd.DataFrame:
     return df
 
 
-def categories_features(df: pd.DataFrame) -> list:
+def identify_topic_columns(df: pd.DataFrame) -> list:
     """
     Identify binary category indicator columns.
 
@@ -130,7 +130,7 @@ def preprocess_features(
     X_train[content_features] = scaler.fit_transform(X_train[content_features])
     X_test[content_features] = scaler.transform(X_test[content_features])
     
-    return X_train, X_test, y_train, y_test, topic_columns, scaler
+    return X_train, X_test, y_train, y_test, topic_columns
 
 
 def prepare_lp_dataframe(df: pd.DataFrame, prediction_column: str = "pred_shares"):
@@ -160,3 +160,4 @@ def prepare_lp_dataframe(df: pd.DataFrame, prediction_column: str = "pred_shares
     }
 
     return shares, topic_dict
+

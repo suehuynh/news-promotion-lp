@@ -132,31 +132,31 @@ def preprocess_features(
     return X_train, X_test, y_train, y_test, categories_features
 
 
-def prepare_lp_dataframe(df: pd.DataFrame, prediction_column: str = "pred_shares"):
-    """
-    Prepare dataframe for LP solver.
+# def prepare_lp_dataframe(df: pd.DataFrame, prediction_column: str = "pred_shares"):
+#     """
+#     Prepare dataframe for LP solver.
 
-    Assumes predictions already exist.
+#     Assumes predictions already exist.
 
-    Returns
-    -------
-    shares : np.array
-    topic_indicators : dict of np.arrays
-    """
+#     Returns
+#     -------
+#     shares : np.array
+#     topic_indicators : dict of np.arrays
+#     """
 
-    df = df.copy()
+#     df = df.copy()
 
-    if prediction_column not in df.columns:
-        raise ValueError(f"{prediction_column} not found in dataframe")
+#     if prediction_column not in df.columns:
+#         raise ValueError(f"{prediction_column} not found in dataframe")
 
-    topic_columns = identify_topic_columns(df)
+#     topic_columns = identify_topic_columns(df)
 
-    shares = df[prediction_column].to_numpy()
+#     shares = df[prediction_column].to_numpy()
 
-    topic_dict = {
-        col: df[col].to_numpy()
-        for col in topic_columns
-    }
+#     topic_dict = {
+#         col: df[col].to_numpy()
+#         for col in topic_columns
+#     }
 
-    return shares, topic_dict
+#     return shares, topic_dict
 

@@ -26,7 +26,9 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
-# Your custom modules
+# Add workspace root to Python path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from src.data.preprocess import load_data, preprocess_features
 from src.models.train import xgb_train
 from src.models.predict import xgb_predict
@@ -85,7 +87,7 @@ def run_data_pipeline(config):
     
     # Preprocess
     print("Preprocessing features...")
-    X_train, X_test, y_train, y_test = preprocess_features(
+    X_train, X_test, y_train, y_test, categories_features = preprocess_features(
         df,
         test_size=config['data']['test_size'],
         random_state=config['data']['random_state']
@@ -118,16 +120,16 @@ def run_modeling_pipeline(X_train, y_train, X_test, y_test, config):
         y_train, 
         **config['model']['params']
     )
-    print("✓ Model trained")
+    print("Model trained")
     
     # Predict
     print("Generating predictions...")
     y_pred = xgb_predict(model, X_test)
-    print("✓ Predictions generated")
+    print("Predictions generated")
     
     # Evaluate
     print("Evaluating model...")
-    evaluate_model(y_test, y_pred, y_pred_proba=None, task='regression', 
+    metrics = evaluate_model(y_test, y_pred, y_pred_proba=None, task='regression', 
                    prefix="test__", verbose=True)
     save_metrics_to_file(metrics, filepath="results/model_metrics.json")
     return model, y_pred, metrics
@@ -201,7 +203,7 @@ def save_results(results, config):
     with open(opt_path, 'w') as f:
         # Convert numpy types to native Python types for JSON serialization
         opt_results = {
-            k: int(v) if isinstance(v, (np.integer, np.int64)) else 
+            k: int(v) if isinstance(v, (np.integer, np.int64)) else  # type: ignore
                float(v) if isinstance(v, (np.floating, np.float64)) else
                v.tolist() if isinstance(v, np.ndarray) else v
             for k, v in results['optimization'].items()

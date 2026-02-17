@@ -14,7 +14,6 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-!pip install ucimlrepo
 from ucimlrepo import fetch_ucirepo
 
 
@@ -34,8 +33,8 @@ def load_data() -> pd.DataFrame:
     # fetch dataset
     online_news_popularity = fetch_ucirepo(id=332)
     # data
-    X = online_news_popularity.data.features
-    y = online_news_popularity.data.targets
+    X = online_news_popularity.data.features # type: ignore
+    y = online_news_popularity.data.targets  # type: ignore
     # dataframe
     X = X.reset_index()
     y = y.reset_index()
@@ -130,7 +129,7 @@ def preprocess_features(
     X_train[content_features] = scaler.fit_transform(X_train[content_features])
     X_test[content_features] = scaler.transform(X_test[content_features])
     
-    return X_train, X_test, y_train, y_test, topic_columns
+    return X_train, X_test, y_train, y_test, categories_features
 
 
 def prepare_lp_dataframe(df: pd.DataFrame, prediction_column: str = "pred_shares"):

@@ -5,7 +5,7 @@ import numpy as np
 def xgb_train(
     X_train,
     y_train,
-    random_state=42
+    **params
 ):
     """
     Train XGBoost regressor.
@@ -14,16 +14,6 @@ def xgb_train(
     -------
     model : trained XGBRegressor
     """
-
-    if params is None:
-        params = {
-            "n_estimators": 300,
-            "max_depth": 6,
-            "learning_rate": 0.05,
-            "subsample": 0.8,
-            "colsample_bytree": 0.8,
-            "random_state": random_state,
-        }
 
     model = xgb.XGBRegressor(**params)
     model.fit(X_train, y_train)

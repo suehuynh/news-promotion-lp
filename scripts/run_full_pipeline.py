@@ -95,15 +95,9 @@ def run_data_pipeline(config):
     print(f"Train set: {len(X_train)} samples")
     print(f"Test set: {len(X_test)} samples")
     
-    # Extract topic indicators
-    print("Extracting topic indicators...")
-    topic_cols = [c for c in df.columns if c.startswith(' data_channel_is')]
-    topic_indicators = {
-        col: df[col].values for col in topic_cols
-    }
-    print(f"Extracted {len(topic_indicators)} topic categories")
+    print(f"Extracted {len(categories_features)} topic categories")
     
-    return X_train, X_test, y_train, y_test, topic_indicators
+    return X_train, X_test, y_train, y_test, categories_features
 
 
 # === PART 4: MODELING PIPELINE ===

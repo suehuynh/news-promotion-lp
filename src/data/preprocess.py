@@ -83,7 +83,6 @@ def preprocess_features(
     Returns
     -------
     X_train, X_test, y_train, y_test
-    categories_features : list
     scaler : fitted scaler (or None)
     """
 
@@ -129,7 +128,7 @@ def preprocess_features(
     X_train[content_features] = scaler.fit_transform(X_train[content_features])
     X_test[content_features] = scaler.transform(X_test[content_features])
     
-    return X_train, X_test, y_train, y_test, categories_features
+    return X_train, X_test, y_train, y_test
 
 
 # def prepare_lp_dataframe(df: pd.DataFrame, prediction_column: str = "pred_shares"):

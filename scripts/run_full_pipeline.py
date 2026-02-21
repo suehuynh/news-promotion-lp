@@ -68,6 +68,28 @@ def setup_directories(config):
     
     print(f" Created {len(dirs_to_create)} directories")  
 
+def setup_logging(log_dir='results/logs'):
+    """Setup logging to both console and file."""
+    # Create log filename with timestamp
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    log_file = f"{log_dir}/pipeline_{timestamp}.log"
+    Path('results/logs').mkdir(parents=True, exist_ok=True)
+    
+    # Create a custom print function that writes to both console and file
+    class Logger:
+        def __init__(self, filename):
+            self.terminal = sys.stdout
+            self.log = open(filename, 'w', encoding='utf-8')
+        def write(self, message):
+            self.terminal.write(message)
+            self.log.write(message)
+        def flush(self):
+            self.terminal.flush()
+            self.log.flush()
+    
+    sys.stdout = Logger(log_file)
+    print(f"Logging to: {log_file}")
+    return log_file
 
 # === PART 3: DATA PIPELINE ===
 def run_data_pipeline(config):
@@ -87,7 +109,7 @@ def run_data_pipeline(config):
     
     # Preprocess
     print("Preprocessing features...")
-    X_train, X_test, y_train, y_test, categories_features = preprocess_features(
+    X_train, X_test, y_train, y_test = preprocess_features(
         df,
         test_size=config['data']['test_size'],
         random_state=config['data']['random_state']
@@ -95,9 +117,13 @@ def run_data_pipeline(config):
     print(f"Train set: {len(X_train)} samples")
     print(f"Test set: {len(X_test)} samples")
     
-    print(f"Extracted {len(categories_features)} topic categories")
+    print("Extracting topic indicators...")
+    categories_features = [c for c in df.columns if c.startswith(' data_channel_is')]
+    categories_indicators = {
+        col: df[col].values for col in categories_features
+    }
     
-    return X_train, X_test, y_train, y_test, categories_features
+    return X_train, X_test, y_train, y_test, categories_indicators
 
 
 # === PART 4: MODELING PIPELINE ===
@@ -177,39 +203,51 @@ def run_optimization_pipeline(predictions, indicators, config):
 
 
 # === PART 6: RESULTS GENERATION ===
+
 def save_results(results, config):
-    """Save all results to files."""
+    """Save all results to files, organized by seed."""
     print("\n" + "="*60)
     print("STEP 4: SAVING RESULTS")
     print("="*60)
     
-    # Create timestamp for this run
-    timestamp = results['timestamp']
+    # Create seed-specific directory
+    seed = config['data']['random_state']
+    seed_dir = f"{config['paths']['results']}/seed_runs/seed_{seed:03d}"
+    Path(seed_dir).mkdir(parents=True, exist_ok=True)
     
     # Save metrics as JSON
-    metrics_path = f"{config['paths']['results']}/model_metrics.json"
+    metrics_path = f"{seed_dir}/model_metrics.json"
     with open(metrics_path, 'w') as f:
         json.dump(results['model_metrics'], f, indent=2)
-    print(f"Model metrics saved to {metrics_path}")
+    print(f"✓ Model metrics saved to {metrics_path}")
     
     # Save optimization results
-    opt_path = f"{config['paths']['results']}/optimization_results.json"
+    opt_path = f"{seed_dir}/optimization_results.json"
     with open(opt_path, 'w') as f:
-        # Convert numpy types to native Python types for JSON serialization
+        # Convert numpy types to native Python types
         opt_results = {
-            k: int(v) if isinstance(v, (np.integer, np.int64)) else  # type: ignore
+            k: int(v) if isinstance(v, (np.integer, np.int64)) else 
                float(v) if isinstance(v, (np.floating, np.float64)) else
                v.tolist() if isinstance(v, np.ndarray) else v
             for k, v in results['optimization'].items()
         }
         json.dump(opt_results, f, indent=2)
-    print(f"Optimization results saved to {opt_path}")
+    print(f"✓ Optimization results saved to {opt_path}")
     
-    # Save full config used
-    config_path = f"{config['paths']['results']}/config_used.yaml"
+    # Save config
+    config_path = f"{seed_dir}/config_used.yaml"
     with open(config_path, 'w') as f:
         yaml.dump(results['config'], f)
-    print(f"Configuration saved to {config_path}")
+    print(f"✓ Configuration saved to {config_path}")
+    
+    # Save timestamp
+    timestamp_path = f"{seed_dir}/timestamp.txt"
+    with open(timestamp_path, 'w') as f:
+        f.write(f"Timestamp: {results['timestamp']}\n")
+        f.write(f"Seed: {seed}\n")
+    print(f"✓ Timestamp saved to {timestamp_path}")
+    
+    print(f"\n✓ All results saved to: {seed_dir}")
 
 
   # === PART 7: MAIN EXECUTION ===
@@ -233,6 +271,9 @@ def main():
     )
     args = parser.parse_args()
     
+    # Log
+    log_file = setup_logging()
+
     # Start
     start_time = datetime.now()
     print("\n" + "="*60)

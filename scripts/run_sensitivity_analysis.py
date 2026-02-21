@@ -52,7 +52,7 @@ def run_sensitivity_analysis(config, diversity_levels):
     # Step 1: Load and preprocess data
     print("\n[1/4] Loading and preprocessing data...")
     df = load_data()
-    X_train, X_test, y_train, y_test, categories_features = preprocess_features(
+    X_train, X_test, y_train, y_test = preprocess_features(
         df,
         test_size=config['data']['test_size'],
         random_state=config['data']['random_state']
@@ -170,37 +170,49 @@ def compute_marginal_costs(results):
 
 def save_sensitivity_results(results, metrics, config, output_dir='results/sensitivity'):
     """Save sensitivity analysis results."""
-    Path(output_dir).mkdir(parents=True, exist_ok=True)
     
     seed = config['data']['random_state']
     
+    seed_dir = f"{output_dir}/seed_{seed:03d}"
+    Path(seed_dir).mkdir(parents=True, exist_ok=True)
+    
     # Save full results as JSON
-    results_path = f"{output_dir}/sensitivity_seed_{seed}.json"
+    results_path = f"{seed_dir}/sensitivity_analysis.json"
     with open(results_path, 'w') as f:
-        # Convert numpy types
+        ## Convert numpy types
         results_clean = []
         for r in results:
             r_clean = {
-                k: int(v) if isinstance(v, (np.integer, np.int64)) else # type: ignore
+                k: int(v) if isinstance(v, (np.integer, np.int64)) else
                    float(v) if isinstance(v, (np.floating, np.float64)) else
                    v.tolist() if isinstance(v, np.ndarray) else v
                 for k, v in r.items()
             }
             results_clean.append(r_clean)
-        json.dump(results_clean, f, indent=2)
-    print(f"Results saved to {results_path}")
+        
+        output_data = {
+            'metadata': {
+                'seed': seed,
+                'timestamp': datetime.now().isoformat(),
+                'model_metrics': metrics
+            },
+            'sensitivity_results': results_clean
+        }
+        json.dump(output_data, f, indent=2)
+    print(f"✓ Sensitivity results saved to {results_path}")
     
-    # Save summary as CSV
+    # Save Pareto frontier as CSV
     summary_df = compute_marginal_costs(results)
-    summary_path = f"{output_dir}/pareto_frontier_seed_{seed}.csv"
-    summary_df.to_csv(summary_path, index=False)
-    print(f"Pareto frontier saved to {summary_path}")
+    pareto_path = f"{seed_dir}/pareto_frontier.csv"
+    summary_df.to_csv(pareto_path, index=False)
+    print(f"✓ Pareto frontier saved to {pareto_path}")
     
-    # Save model metrics
-    metrics_path = f"{output_dir}/model_metrics_seed_{seed}.json"
-    with open(metrics_path, 'w') as f:
-        json.dump(metrics, f, indent=2)
-    print(f"Model metrics saved to {metrics_path}")
+    # Also save model metrics if not already there
+    metrics_path = f"{seed_dir}/model_metrics.json"
+    if not Path(metrics_path).exists():
+        with open(metrics_path, 'w') as f:
+            json.dump(metrics, f, indent=2)
+        print(f"✓ Model metrics saved to {metrics_path}")
     
     return summary_df
 
@@ -231,8 +243,8 @@ def main():
     parser.add_argument(
         '--output',
         type=str,
-        default='results/sensitivity',
-        help='Output directory'
+        default='results/seed_runs', 
+        help='Base output directory (results saved in seed_XXX subdirs)'
     )
     args = parser.parse_args()
     
@@ -280,11 +292,13 @@ def main():
     print(summary_df[['diversity_level', 'lp_shares', 
                      'actual_categories', 'pct_cost', 'max_shares']].to_string(index=False))
     
+    seed = config['data']['random_state']
+    seed_dir = f"{args.output}/seed_{seed:03d}"
     print("\n" + "="*60)
     print("ANALYSIS COMPLETE")
     print("="*60)
     print(f"Duration: {duration:.2f} seconds")
-    print(f"Results saved to: {args.output}")
+    print(f"Results saved to: {seed_dir}")
     print("="*60 + "\n")
 
 

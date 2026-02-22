@@ -124,7 +124,7 @@ def plot_marginal_cost(stats_df, output_path='results/figures/pareto_marginal_co
     ax.plot(D, marginal_diversity_cost, 'o-', linewidth=2.5, markersize=8, color='#E27D60')
     
     ax.set_xlabel('Minimum Diversity Level (D)', fontsize=13)
-    ax.set_ylabel('Average Share Cost', fontsize=13)
+    ax.set_ylabel('Average Shares Trade-off', fontsize=13)
     ax.set_title('Marginal Cost of Increasing Diversity', fontsize=14, fontweight='bold')
     ax.grid(True, alpha=0.3)
     

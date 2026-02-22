@@ -42,7 +42,7 @@ def load_pareto_curves(results_dir='results/seed_runs'):
 def compute_pareto_statistics(combined_df):
     """Compute mean and std for each diversity level."""
     stats = combined_df.groupby('diversity_level').agg({
-        'total_predicted_shares': ['mean', 'std', 'min', 'max', 'count'],
+        'lp_shares': ['mean', 'std', 'min', 'max', 'count'],
         'actual_categories': ['mean', 'std'],
         'pct_cost': ['mean', 'std']
     }).reset_index()
@@ -58,8 +58,8 @@ def plot_pareto_with_confidence(stats_df, output_path='results/figures/pareto_fr
     fig, ax = plt.subplots(figsize=(10, 6))
     
     D = stats_df['diversity_level']
-    mean_shares = stats_df['total_predicted_shares_mean']
-    std_shares = stats_df['total_predicted_shares_std']
+    mean_shares = stats_df['lp_shares_mean']
+    std_shares = stats_df['lp_shares_std']
     
     # Main line
     ax.plot(D, mean_shares, 'o-', linewidth=2.5, markersize=8, 
@@ -94,11 +94,11 @@ def plot_all_seeds_pareto(combined_df, output_path='results/figures/pareto_all_s
     for seed in seeds:
         seed_data = combined_df[combined_df['seed'] == seed]
         ax.plot(seed_data['diversity_level'], 
-               seed_data['total_predicted_shares'],
+               seed_data['lp_shares'],
                'o-', alpha=0.5, linewidth=1.5, label=f'Seed {seed}')
     
     # Add mean curve
-    mean_curve = combined_df.groupby('diversity_level')['total_predicted_shares'].mean()
+    mean_curve = combined_df.groupby('diversity_level')['lp_shares'].mean()
     ax.plot(mean_curve.index, mean_curve.values, 
            'k-', linewidth=3, label='Mean', zorder=10)
     
@@ -151,8 +151,8 @@ def main():
     print("PARETO FRONTIER SUMMARY")
     print("="*60)
     print(stats_df[['diversity_level', 
-                    'total_predicted_shares_mean', 
-                    'total_predicted_shares_std',
+                    'lp_shares_mean', 
+                    'lp_shares_std',
                     'pct_cost_mean']].to_string(index=False))
     
     # Generate plots

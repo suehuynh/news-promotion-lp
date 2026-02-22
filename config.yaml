@@ -33,7 +33,7 @@ optimization:
 
 experiments:
   n_seeds: 10  # robustness analysis across random seeds
-  seeds: [42, 123, 456, 789, 1011, 1213, 1415, 1617, 1819, 2021]
+  seeds: [10, 42, 123, 456, 789, 1010, 1234, 2026, 3443, 7890]
 
 paths:
   data_raw: "data/raw"

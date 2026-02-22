@@ -1,0 +1,63 @@
+Logging to: results/logs/pipeline_20260222_165035.log
+
+============================================================
+NEWS DIVERSITY ILP - FULL PIPELINE
+============================================================
+Start time: 2026-02-22 16:50:35
+Configuration loaded from config.yaml
+ Created 5 directories
+
+============================================================
+STEP 1: DATA LOADING & PREPROCESSING
+============================================================
+Loaded 39644 articles
+Preprocessing features...
+Train set: 31715 samples
+Test set: 7929 samples
+Extracting topic indicators...
+
+============================================================
+STEP 2: MODEL TRAINING
+============================================================
+Training XGBoost model...
+Model trained
+Generating predictions...
+Predictions generated
+Evaluating model...
+
+==================================================
+TEST__ METRICS
+==================================================
+test__rmse          : 0.8543
+test__mae           : 0.6245
+test__r2            : 0.1454
+test__mse           : 0.7299
+==================================================
+
+Metrics saved to results/model_metrics.json
+
+============================================================
+STEP 3: ILP OPTIMIZATION
+============================================================
+Solving ILP with K=10...
+ILP solved: Optimal
+Selected 10 articles
+Total predicted shares: 90
+
+============================================================
+STEP 4: SAVING RESULTS
+============================================================
+✓ Model metrics saved to results/seed_runs/seed_1234/model_metrics.json
+✓ Optimization results saved to results/seed_runs/seed_1234/optimization_results.json
+✓ Configuration saved to results/seed_runs/seed_1234/config_used.yaml
+✓ Timestamp saved to results/seed_runs/seed_1234/timestamp.txt
+
+✓ All results saved to: results/seed_runs/seed_1234
+
+============================================================
+PIPELINE COMPLETE
+============================================================
+Duration: 5.85 seconds
+Results saved to: results
+============================================================
+

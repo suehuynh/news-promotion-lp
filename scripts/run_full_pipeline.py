@@ -118,9 +118,9 @@ def run_data_pipeline(config):
     print(f"Test set: {len(X_test)} samples")
     
     print("Extracting topic indicators...")
-    categories_features = [c for c in df.columns if c.startswith(' data_channel_is')]
+    categories_features = [c for c in X_train.columns if c.startswith(' data_channel_is')]
     categories_indicators = {
-        col: df[col].values for col in categories_features
+        col: X_train[col].values for col in categories_features
     }
     
     return X_train, X_test, y_train, y_test, categories_indicators

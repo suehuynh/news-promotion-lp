@@ -44,7 +44,8 @@ def compute_pareto_statistics(combined_df):
     stats = combined_df.groupby('diversity_level').agg({
         'lp_shares': ['mean', 'std', 'min', 'max', 'count'],
         'actual_categories': ['mean', 'std'],
-        'pct_cost': ['mean', 'std']
+        'pct_cost': ['mean', 'std'],
+        'diversity_cost': ['mean', 'std']
     }).reset_index()
     
     # Flatten column names
@@ -73,8 +74,8 @@ def plot_pareto_with_confidence(stats_df, output_path='results/figures/pareto_fr
                     label='±1 SD')
     
     ax.set_xlabel('Minimum Diversity Level (D)', fontsize=13)
-    ax.set_ylabel('Total Predicted Shares', fontsize=13)
-    ax.set_title('Pareto Frontier: Diversity vs. Engagement\n(Robust across seeds)', 
+    ax.set_ylabel('LP-Optimized Shares', fontsize=13)
+    ax.set_title('Pareto Frontier: Diversity vs. Engagement across seeds', 
                 fontsize=14, fontweight='bold')
     ax.legend(fontsize=11)
     ax.grid(True, alpha=0.3)
@@ -103,7 +104,7 @@ def plot_all_seeds_pareto(combined_df, output_path='results/figures/pareto_all_s
            'k-', linewidth=3, label='Mean', zorder=10)
     
     ax.set_xlabel('Minimum Diversity Level (D)', fontsize=13)
-    ax.set_ylabel('Total Predicted Shares', fontsize=13)
+    ax.set_ylabel('LP-Optimized Shares', fontsize=13)
     ax.set_title('Pareto Frontiers Across All Seeds', fontsize=14, fontweight='bold')
     ax.legend(fontsize=9, ncol=2)
     ax.grid(True, alpha=0.3)
@@ -113,6 +114,24 @@ def plot_all_seeds_pareto(combined_df, output_path='results/figures/pareto_all_s
     print(f"✓ All seeds Pareto plot saved to {output_path}")
     plt.close()
 
+def plot_marginal_cost(stats_df, output_path='results/figures/pareto_marginal_cost.pdf'):
+    """Plot marginal cost of increasing diversity."""
+    fig, ax = plt.subplots(figsize=(10, 6))
+    
+    D = stats_df['diversity_level']
+    marginal_diversity_cost = stats_df['diversity_cost_mean']
+    
+    ax.plot(D, marginal_diversity_cost, 'o-', linewidth=2.5, markersize=8, color='#E27D60')
+    
+    ax.set_xlabel('Minimum Diversity Level (D)', fontsize=13)
+    ax.set_ylabel('Average Share Cost', fontsize=13)
+    ax.set_title('Marginal Cost of Increasing Diversity', fontsize=14, fontweight='bold')
+    ax.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    print(f"✓ Marginal cost plot saved to {output_path}")
+    plt.close()
 
 def main():
     print("\n" + "="*60)

@@ -50,6 +50,11 @@ def compute_pareto_statistics(combined_df):
     
     # Flatten column names
     stats.columns = ['_'.join(col).strip('_') for col in stats.columns.values]
+
+    # Marginal cost = f(D-1) - f(D)
+    stats['marginal_cost_mean'] = -stats['lp_shares_mean'].diff()
+    stats.loc[stats['diversity_level'] == 0, 'marginal_cost_mean'] = 0
+    
     
     return stats
 
@@ -114,23 +119,126 @@ def plot_all_seeds_pareto(combined_df, output_path='results/figures/pareto_all_s
     print(f"✓ All seeds Pareto plot saved to {output_path}")
     plt.close()
 
-def plot_marginal_cost(stats_df, output_path='results/figures/pareto_marginal_cost.pdf'):
-    """Plot marginal cost of increasing diversity."""
-    fig, ax = plt.subplots(figsize=(10, 6))
+def plot_cost_analysis(stats_df, output_path='results/figures/cost_analysis.pdf'):
+    """Plot comprehensive cost analysis: diversity cost vs. marginal cost."""
+    
+    fig, axes = plt.subplots(2, 2, figsize=(16, 10))
     
     D = stats_df['diversity_level']
-    marginal_diversity_cost = stats_df['diversity_cost_mean']
+    shares = stats_df['lp_shares_mean']
+    diversity_cost = stats_df['diversity_cost_mean']
+    marginal_cost = stats_df['marginal_cost_mean']
+    pct_cost = stats_df['pct_cost_mean']
     
-    ax.plot(D, marginal_diversity_cost, 'o-', linewidth=2.5, markersize=8, color='#E27D60')
+    # ============================================
+    # Plot 1: Pareto Frontier (Top Left)
+    # ============================================
+    ax1 = axes[0, 0]
+    ax1.plot(D, shares, 'o-', linewidth=2.5, markersize=8, color='#2E86AB')
+    ax1.set_xlabel('Diversity Level (D)', fontsize=12)
+    ax1.set_ylabel('Total Predicted Shares', fontsize=12)
+    ax1.set_title('Pareto Frontier: Shares vs. Diversity', fontsize=13, fontweight='bold')
+    ax1.grid(True, alpha=0.3)
+    ax1.set_xticks(D)
     
-    ax.set_xlabel('Minimum Diversity Level (D)', fontsize=13)
-    ax.set_ylabel('Average Shares Trade-off', fontsize=13)
-    ax.set_title('Marginal Cost of Increasing Diversity', fontsize=14, fontweight='bold')
-    ax.grid(True, alpha=0.3)
+    # Add max shares line
+    max_shares = shares.max()
+    ax1.axhline(y=max_shares, color='red', linestyle='--', 
+                linewidth=1, alpha=0.5, label=f'Maximum: {max_shares:.0f}')
+    ax1.legend()
+    
+    # ============================================
+    # Plot 2: Diversity Cost (Top Right)
+    # ============================================
+    ax2 = axes[0, 1]
+    ax2.plot(D, diversity_cost, 'o-', linewidth=2.5, markersize=8, color='#E27D60')
+    ax2.fill_between(D, 0, diversity_cost, alpha=0.3, color='#E27D60')
+    ax2.set_xlabel('Diversity Level (D)', fontsize=12)
+    ax2.set_ylabel('Diversity Cost (Shares)', fontsize=12)
+    ax2.set_title('Total Cost vs. Naive Top-10\n[Top-10 Shares - f(D)]', 
+                  fontsize=13, fontweight='bold')
+    ax2.grid(True, alpha=0.3)
+    ax2.set_xticks(D)
+    
+    # Add percentage annotations
+    for d, cost, pct in zip(D, diversity_cost, pct_cost):
+        if d > 0:  # Skip D=0
+            ax2.text(d, cost + 100, f'{pct:.1f}%', 
+                    ha='center', va='bottom', fontsize=9, color='#C44536')
+    
+    # ============================================
+    # Plot 3: Marginal Cost (Bottom Left)
+    # ============================================
+    ax3 = axes[1, 0]
+    
+    # Color bars by magnitude
+    valid = marginal_cost > 0  # Exclude D=0
+    colors = []
+    for cost in marginal_cost[valid]:
+        if cost < 700:
+            colors.append('#2ECC71')  # Green (cheap)
+        elif cost < 1000:
+            colors.append('#F39C12')  # Orange (moderate)
+        else:
+            colors.append('#E74C3C')  # Red (expensive)
+    
+    bars = ax3.bar(D[valid], marginal_cost[valid], color=colors, 
+                   alpha=0.8, edgecolor='black', linewidth=1.5)
+    ax3.set_xlabel('Diversity Level (D)', fontsize=12)
+    ax3.set_ylabel('Marginal Cost (Shares)', fontsize=12)
+    ax3.set_title('Marginal Cost of Each Diversity Level\n[f(D-1) - f(D)]', 
+                  fontsize=13, fontweight='bold')
+    ax3.grid(True, alpha=0.3, axis='y')
+    ax3.set_xticks(D)
+    
+    # Add value labels on bars
+    for d, cost in zip(D[valid], marginal_cost[valid]):
+        ax3.text(d, cost + 50, f'{cost:.0f}', 
+                ha='center', va='bottom', fontsize=10, fontweight='bold')
+    
+    # Add legend
+    from matplotlib.patches import Patch
+    legend_elements = [
+        Patch(facecolor='#2ECC71', label='Low (<700)'),
+        Patch(facecolor='#F39C12', label='Moderate (700-1000)'),
+        Patch(facecolor='#E74C3C', label='High (>1000)')
+    ]
+    ax3.legend(handles=legend_elements, loc='upper left', fontsize=9)
+    
+    # ============================================
+    # Plot 4: Cost Comparison (Bottom Right)
+    # ============================================
+    ax4 = axes[1, 1]
+    
+    # Plot both costs on same axis (normalized)
+    ax4_twin = ax4.twinx()
+    
+    # Diversity cost (cumulative)
+    line1 = ax4.plot(D, diversity_cost, 'o-', linewidth=2.5, markersize=8, 
+                     color='#E27D60', label='Total Cost (vs. Naive)')
+    ax4.set_xlabel('Diversity Level (D)', fontsize=12)
+    ax4.set_ylabel('Total Diversity Cost (Shares)', fontsize=12, color='#E27D60')
+    ax4.tick_params(axis='y', labelcolor='#E27D60')
+    
+    # Marginal cost (incremental)
+    line2 = ax4_twin.plot(D[valid], marginal_cost[valid], 's-', linewidth=2.5, 
+                          markersize=8, color='#2E86AB', label='Marginal Cost (Per Level)')
+    ax4_twin.set_ylabel('Marginal Cost (Shares)', fontsize=12, color='#2E86AB')
+    ax4_twin.tick_params(axis='y', labelcolor='#2E86AB')
+    
+    ax4.set_title('Cost Comparison: Total vs. Marginal', 
+                  fontsize=13, fontweight='bold')
+    ax4.grid(True, alpha=0.3)
+    ax4.set_xticks(D)
+    
+    # Combine legends
+    lines = line1 + line2
+    labels = [l.get_label() for l in lines]
+    ax4.legend(lines, labels, loc='upper left', fontsize=9)
     
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
-    print(f"✓ Marginal cost plot saved to {output_path}")
+    print(f"✓ Cost analysis plot saved to {output_path}")
     plt.close()
 
 def main():
@@ -181,7 +289,7 @@ def main():
     
     plot_pareto_with_confidence(stats_df)
     plot_all_seeds_pareto(combined_df)
-    plot_marginal_cost(stats_df)
+    plot_cost_analysis(stats_df)
     
     print("\n" + "="*60)
     print("AGGREGATION COMPLETE")

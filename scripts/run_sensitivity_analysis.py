@@ -73,9 +73,9 @@ def run_sensitivity_analysis(config, diversity_levels):
     # Step 3: Extract topic indicators (ONCE)
     print("\n[3/4] Extracting topic indicators...")
     topic_indicators = {}
-    for col in df.columns:
+    for col in X_train.columns:
         if col.startswith(' data_channel_is'):
-            topic_indicators[col] = df[col].values
+            topic_indicators[col] = X_train[col].values
     print(f"Extracted {len(topic_indicators)} categories")
     
     # Step 4: Run ILP for each diversity level
@@ -123,7 +123,7 @@ def run_sensitivity_analysis(config, diversity_levels):
         print(f"    Diversity cost: {diversity_cost:.5f} shares ({pct_cost:.2f}%)")
         
         # Count actual number of categories in selection
-        selected_df = df.iloc[selected_indices]
+        selected_df = X_train.iloc[selected_indices]
         actual_categories = sum(
             selected_df[col].sum() > 0 
             for col in topic_indicators.keys()

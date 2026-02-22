@@ -1,0 +1,190 @@
+{
+  "metadata": {
+    "seed": 456,
+    "timestamp": "2026-02-22T23:06:14.043014",
+    "model_metrics": {
+      "test_rmse": 0.8644156810386595,
+      "test_mae": 0.6325227107220001,
+      "test_r2": 0.15711067648681576,
+      "test_mse": 0.7472144696255296
+    }
+  },
+  "sensitivity_results": [
+    {
+      "diversity_level": 0,
+      "lp_shares": 89.0248031616211,
+      "top10_shares": 89.02481079101562,
+      "diversity_cost": 7.62939453125e-06,
+      "pct_cost": 8.569964847993106e-06,
+      "n_selected": 10,
+      "actual_categories": 7,
+      "selected_indices": [
+        881,
+        1396,
+        2285,
+        2796,
+        2832,
+        3602,
+        5351,
+        5779,
+        6330,
+        6584
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 1,
+      "lp_shares": 89.0248031616211,
+      "top10_shares": 89.02481079101562,
+      "diversity_cost": 7.62939453125e-06,
+      "pct_cost": 8.569964847993106e-06,
+      "n_selected": 10,
+      "actual_categories": 7,
+      "selected_indices": [
+        881,
+        1396,
+        2285,
+        2796,
+        2832,
+        3602,
+        5351,
+        5779,
+        6330,
+        6584
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 2,
+      "lp_shares": 89.0248031616211,
+      "top10_shares": 89.02481079101562,
+      "diversity_cost": 7.62939453125e-06,
+      "pct_cost": 8.569964847993106e-06,
+      "n_selected": 10,
+      "actual_categories": 7,
+      "selected_indices": [
+        881,
+        1396,
+        2285,
+        2796,
+        2832,
+        3602,
+        5351,
+        5779,
+        6330,
+        6584
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 3,
+      "lp_shares": 89.0248031616211,
+      "top10_shares": 89.02481079101562,
+      "diversity_cost": 7.62939453125e-06,
+      "pct_cost": 8.569964847993106e-06,
+      "n_selected": 10,
+      "actual_categories": 7,
+      "selected_indices": [
+        881,
+        1396,
+        2285,
+        2796,
+        2832,
+        3602,
+        5351,
+        5779,
+        6330,
+        6584
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 4,
+      "lp_shares": 89.0248031616211,
+      "top10_shares": 89.02481079101562,
+      "diversity_cost": 7.62939453125e-06,
+      "pct_cost": 8.569964847993106e-06,
+      "n_selected": 10,
+      "actual_categories": 7,
+      "selected_indices": [
+        881,
+        1396,
+        2285,
+        2796,
+        2832,
+        3602,
+        5351,
+        5779,
+        6330,
+        6584
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 5,
+      "lp_shares": 89.0248031616211,
+      "top10_shares": 89.02481079101562,
+      "diversity_cost": 7.62939453125e-06,
+      "pct_cost": 8.569964847993106e-06,
+      "n_selected": 10,
+      "actual_categories": 7,
+      "selected_indices": [
+        881,
+        1396,
+        2285,
+        2796,
+        2832,
+        3602,
+        5351,
+        5779,
+        6330,
+        6584
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 6,
+      "lp_shares": 89.0248031616211,
+      "top10_shares": 89.02481079101562,
+      "diversity_cost": 7.62939453125e-06,
+      "pct_cost": 8.569964847993106e-06,
+      "n_selected": 10,
+      "actual_categories": 7,
+      "selected_indices": [
+        881,
+        1396,
+        2285,
+        2796,
+        2832,
+        3602,
+        5351,
+        5779,
+        6330,
+        6584
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 7,
+      "lp_shares": 89.0248031616211,
+      "top10_shares": 89.02481079101562,
+      "diversity_cost": 7.62939453125e-06,
+      "pct_cost": 8.569964847993106e-06,
+      "n_selected": 10,
+      "actual_categories": 7,
+      "selected_indices": [
+        881,
+        1396,
+        2285,
+        2796,
+        2832,
+        3602,
+        5351,
+        5779,
+        6330,
+        6584
+      ],
+      "status": "Optimal"
+    }
+  ]
+}

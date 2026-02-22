@@ -1,0 +1,190 @@
+{
+  "metadata": {
+    "seed": 42,
+    "timestamp": "2026-02-22T23:05:23.248938",
+    "model_metrics": {
+      "test_rmse": 0.8464094305584725,
+      "test_mae": 0.6275223237484351,
+      "test_r2": 0.16425093948449065,
+      "test_mse": 0.7164089241383177
+    }
+  },
+  "sensitivity_results": [
+    {
+      "diversity_level": 0,
+      "lp_shares": 90.41179656982422,
+      "top10_shares": 90.41179656982422,
+      "diversity_cost": 0.0,
+      "pct_cost": 0.0,
+      "n_selected": 10,
+      "actual_categories": 6,
+      "selected_indices": [
+        968,
+        1198,
+        2603,
+        2669,
+        2915,
+        3662,
+        4284,
+        6231,
+        6395,
+        7344
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 1,
+      "lp_shares": 90.41179656982422,
+      "top10_shares": 90.41179656982422,
+      "diversity_cost": 0.0,
+      "pct_cost": 0.0,
+      "n_selected": 10,
+      "actual_categories": 6,
+      "selected_indices": [
+        968,
+        1198,
+        2603,
+        2669,
+        2915,
+        3662,
+        4284,
+        6231,
+        6395,
+        7344
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 2,
+      "lp_shares": 90.41179656982422,
+      "top10_shares": 90.41179656982422,
+      "diversity_cost": 0.0,
+      "pct_cost": 0.0,
+      "n_selected": 10,
+      "actual_categories": 6,
+      "selected_indices": [
+        968,
+        1198,
+        2603,
+        2669,
+        2915,
+        3662,
+        4284,
+        6231,
+        6395,
+        7344
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 3,
+      "lp_shares": 90.41179656982422,
+      "top10_shares": 90.41179656982422,
+      "diversity_cost": 0.0,
+      "pct_cost": 0.0,
+      "n_selected": 10,
+      "actual_categories": 6,
+      "selected_indices": [
+        968,
+        1198,
+        2603,
+        2669,
+        2915,
+        3662,
+        4284,
+        6231,
+        6395,
+        7344
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 4,
+      "lp_shares": 90.41179656982422,
+      "top10_shares": 90.41179656982422,
+      "diversity_cost": 0.0,
+      "pct_cost": 0.0,
+      "n_selected": 10,
+      "actual_categories": 6,
+      "selected_indices": [
+        968,
+        1198,
+        2603,
+        2669,
+        2915,
+        3662,
+        4284,
+        6231,
+        6395,
+        7344
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 5,
+      "lp_shares": 90.41179656982422,
+      "top10_shares": 90.41179656982422,
+      "diversity_cost": 0.0,
+      "pct_cost": 0.0,
+      "n_selected": 10,
+      "actual_categories": 6,
+      "selected_indices": [
+        968,
+        1198,
+        2603,
+        2669,
+        2915,
+        3662,
+        4284,
+        6231,
+        6395,
+        7344
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 6,
+      "lp_shares": 90.41179656982422,
+      "top10_shares": 90.41179656982422,
+      "diversity_cost": 0.0,
+      "pct_cost": 0.0,
+      "n_selected": 10,
+      "actual_categories": 6,
+      "selected_indices": [
+        968,
+        1198,
+        2603,
+        2669,
+        2915,
+        3662,
+        4284,
+        6231,
+        6395,
+        7344
+      ],
+      "status": "Optimal"
+    },
+    {
+      "diversity_level": 7,
+      "lp_shares": 90.33199310302734,
+      "top10_shares": 90.41179656982422,
+      "diversity_cost": 0.079803466796875,
+      "pct_cost": 0.08826665580272675,
+      "n_selected": 10,
+      "actual_categories": 7,
+      "selected_indices": [
+        968,
+        2603,
+        2669,
+        2915,
+        3662,
+        4284,
+        5024,
+        6231,
+        6395,
+        7344
+      ],
+      "status": "Optimal"
+    }
+  ]
+}

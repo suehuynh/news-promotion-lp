@@ -181,6 +181,7 @@ def main():
     
     plot_pareto_with_confidence(stats_df)
     plot_all_seeds_pareto(combined_df)
+    plot_marginal_cost(stats_df)
     
     print("\n" + "="*60)
     print("AGGREGATION COMPLETE")

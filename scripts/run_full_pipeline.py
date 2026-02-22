@@ -150,7 +150,7 @@ def run_modeling_pipeline(X_train, y_train, X_test, y_test, config):
     # Evaluate
     print("Evaluating model...")
     metrics = evaluate_model(y_test, y_pred, y_pred_proba=None, task='regression', 
-                   prefix="test__", verbose=True)
+                   prefix="test_", verbose=True)
     save_metrics_to_file(metrics, filepath="results/model_metrics.json")
     return model, y_pred, metrics
 

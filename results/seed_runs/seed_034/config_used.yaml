@@ -1,0 +1,57 @@
+data:
+  dataset_id: 332
+  random_state: 34
+  source: UCI Online News Popularity
+  target_transform: ' log_shares'
+  test_size: 0.2
+experiments:
+  n_seeds: 10
+  seeds:
+  - 10
+  - 42
+  - 123
+  - 456
+  - 789
+  - 1010
+  - 1234
+  - 2026
+  - 3443
+  - 7890
+model:
+  params:
+    colsample_bytree: 0.8
+    learning_rate: 0.1
+    max_depth: 6
+    n_estimators: 100
+    objective: reg:squarederror
+    random_state: 42
+    subsample: 0.8
+  random_state: 34
+  type: XGBoost
+optimization:
+  K: 10
+  diversity_levels:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  solver: PULP_CBC_CMD
+  solver_verbose: false
+paths:
+  data_processed: data/processed
+  data_raw: data/raw
+  figures: results/figures
+  models: models/saved
+  results: results
+  tables: results/tables
+preprocessing:
+  scale_features: true
+  scaler_type: standard
+project:
+  author: Sue Huynh
+  name: News Diversity ILP
+  version: 1.0.0

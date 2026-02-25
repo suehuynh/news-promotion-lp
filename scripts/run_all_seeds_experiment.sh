@@ -2,7 +2,7 @@
 # run_all_with_seeds.sh - Run both analyses with same seeds
 
 # Configuration
-SEEDS=(10 42 123 456 789 1010 1234 2026 3443 7890)
+SEEDS=(0 1 7 10 34 42 123 289 340 456 789 1001 1010 1234 2026 3443 4567 7890)
 CONFIG="config.yaml"
 
 echo "========================================================================"

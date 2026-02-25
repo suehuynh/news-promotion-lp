@@ -155,7 +155,7 @@ def plot_cost_analysis(stats_df, output_path='results/figures/cost_analysis.pdf'
     ax2.fill_between(D, 0, diversity_cost, alpha=0.3, color='#E27D60')
     ax2.set_xlabel('Diversity Level (D)', fontsize=12)
     ax2.set_ylabel('Diversity Cost (Shares)', fontsize=12)
-    ax2.set_title('Total Cost vs. Naive Top-10\n[Top-10 Shares - f(D)]', 
+    ax2.set_title('Share Cost per Diversity Level\n[Top-10 Shares - f(D)]', 
                   fontsize=13, fontweight='bold')
     ax2.grid(True, alpha=0.3)
     ax2.set_xticks(D)
@@ -236,7 +236,8 @@ def plot_cost_analysis(stats_df, output_path='results/figures/cost_analysis.pdf'
     labels = [l.get_label() for l in lines]
     ax4.legend(lines, labels, loc='upper left', fontsize=9)
     
-    plt.tight_layout()
+    plt.subplots_adjust(left=0.08, right=0.95, top=0.95, bottom=0.08, 
+                    hspace=0.35, wspace=0.25)
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     print(f"✓ Cost analysis plot saved to {output_path}")
     plt.close()

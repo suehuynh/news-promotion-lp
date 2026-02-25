@@ -1,19 +1,19 @@
 {
   "metadata": {
     "seed": 7890,
-    "timestamp": "2026-02-22T23:08:45.110326",
+    "timestamp": "2026-02-25T03:16:53.430838",
     "model_metrics": {
-      "test_rmse": 0.8344517304432401,
-      "test_mae": 0.6172234924266929,
-      "test_r2": 0.17405452472993244,
-      "test_mse": 0.6963096904397177
+      "test_rmse": 14801.866854281972,
+      "test_mae": 2339.8042886815556,
+      "test_r2": 0.0006655752277667792,
+      "test_mse": 219095262.3718913
     }
   },
   "sensitivity_results": [
     {
       "diversity_level": 0,
-      "lp_shares": 90.12580108642578,
-      "top10_shares": 90.12580108642578,
+      "lp_shares": 82745.328125,
+      "top10_shares": 82745.328125,
       "diversity_cost": 0.0,
       "pct_cost": 0.0,
       "n_selected": 10,
@@ -34,8 +34,8 @@
     },
     {
       "diversity_level": 1,
-      "lp_shares": 90.12580108642578,
-      "top10_shares": 90.12580108642578,
+      "lp_shares": 82745.328125,
+      "top10_shares": 82745.328125,
       "diversity_cost": 0.0,
       "pct_cost": 0.0,
       "n_selected": 10,
@@ -56,8 +56,8 @@
     },
     {
       "diversity_level": 2,
-      "lp_shares": 90.12580108642578,
-      "top10_shares": 90.12580108642578,
+      "lp_shares": 82745.328125,
+      "top10_shares": 82745.328125,
       "diversity_cost": 0.0,
       "pct_cost": 0.0,
       "n_selected": 10,
@@ -78,8 +78,8 @@
     },
     {
       "diversity_level": 3,
-      "lp_shares": 90.12580108642578,
-      "top10_shares": 90.12580108642578,
+      "lp_shares": 82745.328125,
+      "top10_shares": 82745.328125,
       "diversity_cost": 0.0,
       "pct_cost": 0.0,
       "n_selected": 10,
@@ -100,8 +100,8 @@
     },
     {
       "diversity_level": 4,
-      "lp_shares": 90.12580108642578,
-      "top10_shares": 90.12580108642578,
+      "lp_shares": 82745.328125,
+      "top10_shares": 82745.328125,
       "diversity_cost": 0.0,
       "pct_cost": 0.0,
       "n_selected": 10,
@@ -122,8 +122,8 @@
     },
     {
       "diversity_level": 5,
-      "lp_shares": 90.12580108642578,
-      "top10_shares": 90.12580108642578,
+      "lp_shares": 82745.328125,
+      "top10_shares": 82745.328125,
       "diversity_cost": 0.0,
       "pct_cost": 0.0,
       "n_selected": 10,
@@ -144,8 +144,8 @@
     },
     {
       "diversity_level": 6,
-      "lp_shares": 90.12580108642578,
-      "top10_shares": 90.12580108642578,
+      "lp_shares": 82745.328125,
+      "top10_shares": 82745.328125,
       "diversity_cost": 0.0,
       "pct_cost": 0.0,
       "n_selected": 10,
@@ -166,10 +166,10 @@
     },
     {
       "diversity_level": 7,
-      "lp_shares": 90.05661010742188,
-      "top10_shares": 90.12580108642578,
-      "diversity_cost": 0.06919097900390625,
-      "pct_cost": 0.0767715573310852,
+      "lp_shares": 82284.9453125,
+      "top10_shares": 82745.328125,
+      "diversity_cost": 460.3828125,
+      "pct_cost": 0.5563852787017822,
       "n_selected": 10,
       "actual_categories": 7,
       "selected_indices": [

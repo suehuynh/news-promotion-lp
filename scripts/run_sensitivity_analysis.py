@@ -67,7 +67,12 @@ def run_sensitivity_analysis(config, diversity_levels):
         **config['model']['params']
     )
     y_pred = xgb_predict(model, X_test)
-    metrics = evaluate_model(y_test, y_pred, prefix="test_", task='regression', verbose=False)
+
+    # Convert to original scale
+    y_pred = np.exp(y_pred)
+    y_test_raw = np.exp(y_test)
+
+    metrics = evaluate_model(y_test_raw, y_pred, prefix="test_", task='regression', verbose=False)
     print(f"Model trained. Test RMSE: {metrics['test_rmse']:.2f}, R²: {metrics['test_r2']:.4f}")
     
     # Step 3: Extract topic indicators (ONCE)

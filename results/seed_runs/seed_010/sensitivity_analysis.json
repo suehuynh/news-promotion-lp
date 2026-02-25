@@ -1,21 +1,21 @@
 {
   "metadata": {
     "seed": 10,
-    "timestamp": "2026-02-22T23:04:58.358228",
+    "timestamp": "2026-02-25T03:10:58.643438",
     "model_metrics": {
-      "test_rmse": 0.8524101464865518,
-      "test_mae": 0.6240814327499211,
-      "test_r2": 0.1693324864636564,
-      "test_mse": 0.7266030578332247
+      "test_rmse": 13449.947112955939,
+      "test_mae": 2441.857830373317,
+      "test_r2": -0.001305177803171409,
+      "test_mse": 180901077.34131178
     }
   },
   "sensitivity_results": [
     {
       "diversity_level": 0,
-      "lp_shares": 88.62506103515625,
-      "top10_shares": 88.62506866455078,
-      "diversity_cost": 7.62939453125e-06,
-      "pct_cost": 8.608619282313157e-06,
+      "lp_shares": 70856.578125,
+      "top10_shares": 70856.5703125,
+      "diversity_cost": -0.0078125,
+      "pct_cost": -1.1025795174646191e-05,
       "n_selected": 10,
       "actual_categories": 6,
       "selected_indices": [
@@ -34,10 +34,10 @@
     },
     {
       "diversity_level": 1,
-      "lp_shares": 88.62506103515625,
-      "top10_shares": 88.62506866455078,
-      "diversity_cost": 7.62939453125e-06,
-      "pct_cost": 8.608619282313157e-06,
+      "lp_shares": 70856.578125,
+      "top10_shares": 70856.5703125,
+      "diversity_cost": -0.0078125,
+      "pct_cost": -1.1025795174646191e-05,
       "n_selected": 10,
       "actual_categories": 6,
       "selected_indices": [
@@ -56,10 +56,10 @@
     },
     {
       "diversity_level": 2,
-      "lp_shares": 88.62506103515625,
-      "top10_shares": 88.62506866455078,
-      "diversity_cost": 7.62939453125e-06,
-      "pct_cost": 8.608619282313157e-06,
+      "lp_shares": 70856.578125,
+      "top10_shares": 70856.5703125,
+      "diversity_cost": -0.0078125,
+      "pct_cost": -1.1025795174646191e-05,
       "n_selected": 10,
       "actual_categories": 6,
       "selected_indices": [
@@ -78,10 +78,10 @@
     },
     {
       "diversity_level": 3,
-      "lp_shares": 88.62506103515625,
-      "top10_shares": 88.62506866455078,
-      "diversity_cost": 7.62939453125e-06,
-      "pct_cost": 8.608619282313157e-06,
+      "lp_shares": 70856.578125,
+      "top10_shares": 70856.5703125,
+      "diversity_cost": -0.0078125,
+      "pct_cost": -1.1025795174646191e-05,
       "n_selected": 10,
       "actual_categories": 6,
       "selected_indices": [
@@ -100,10 +100,10 @@
     },
     {
       "diversity_level": 4,
-      "lp_shares": 88.62506103515625,
-      "top10_shares": 88.62506866455078,
-      "diversity_cost": 7.62939453125e-06,
-      "pct_cost": 8.608619282313157e-06,
+      "lp_shares": 70856.578125,
+      "top10_shares": 70856.5703125,
+      "diversity_cost": -0.0078125,
+      "pct_cost": -1.1025795174646191e-05,
       "n_selected": 10,
       "actual_categories": 6,
       "selected_indices": [
@@ -122,10 +122,10 @@
     },
     {
       "diversity_level": 5,
-      "lp_shares": 88.62506103515625,
-      "top10_shares": 88.62506866455078,
-      "diversity_cost": 7.62939453125e-06,
-      "pct_cost": 8.608619282313157e-06,
+      "lp_shares": 70856.578125,
+      "top10_shares": 70856.5703125,
+      "diversity_cost": -0.0078125,
+      "pct_cost": -1.1025795174646191e-05,
       "n_selected": 10,
       "actual_categories": 6,
       "selected_indices": [
@@ -144,10 +144,10 @@
     },
     {
       "diversity_level": 6,
-      "lp_shares": 88.62506103515625,
-      "top10_shares": 88.62506866455078,
-      "diversity_cost": 7.62939453125e-06,
-      "pct_cost": 8.608619282313157e-06,
+      "lp_shares": 70856.578125,
+      "top10_shares": 70856.5703125,
+      "diversity_cost": -0.0078125,
+      "pct_cost": -1.1025795174646191e-05,
       "n_selected": 10,
       "actual_categories": 6,
       "selected_indices": [
@@ -166,10 +166,10 @@
     },
     {
       "diversity_level": 7,
-      "lp_shares": 88.47726440429688,
-      "top10_shares": 88.62506866455078,
-      "diversity_cost": 0.14780426025390625,
-      "pct_cost": 0.16677477955818176,
+      "lp_shares": 69965.0625,
+      "top10_shares": 70856.5703125,
+      "diversity_cost": 891.5078125,
+      "pct_cost": 1.2581865787506104,
       "n_selected": 10,
       "actual_categories": 7,
       "selected_indices": [

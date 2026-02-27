@@ -97,7 +97,7 @@ def preprocess_features(
     time_features = [c for c in df.columns if c.startswith(" weekday_")]
     content_features = [' n_unique_tokens',' num_hrefs',' num_imgs', ' num_videos', 
                     ' average_token_length',' num_keywords', 
-                    ' kw_avg_min', ' kw_avg_max', ' kw_min_avg',' kw_avg_avg', 
+                    ' kw_avg_min', ' kw_avg_max',' kw_avg_avg', 
                     ' self_reference_avg_sharess',
                     ' LDA_00', ' LDA_01', ' LDA_02',
                     ' LDA_03', ' LDA_04', 

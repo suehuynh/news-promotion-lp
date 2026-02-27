@@ -234,23 +234,23 @@ def evaluate_model(y_true, y_pred, y_pred_proba=None, task='regression',
     return metrics
 
 
-def save_metrics_to_file(metrics, filepath="results/model_metrics.json"):
-    """
-    Save metrics dictionary to JSON file.
+# def save_metrics_to_file(metrics, filepath="results/model_metrics.json"):
+#     """
+#     Save metrics dictionary to JSON file.
     
-    Parameters
-    ----------
-    metrics : dict
-        Metrics to save.
-    filepath : str
-        Output filepath.
-    """
-    import json
-    import os
+#     Parameters
+#     ----------
+#     metrics : dict
+#         Metrics to save.
+#     filepath : str
+#         Output filepath.
+#     """
+#     import json
+#     import os
     
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+#     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     
-    with open(filepath, 'w') as f:
-        json.dump(metrics, f, indent=2)
+#     with open(filepath, 'w') as f:
+#         json.dump(metrics, f, indent=2)
     
-    print(f"Metrics saved to {filepath}")
+#     print(f"Metrics saved to {filepath}")

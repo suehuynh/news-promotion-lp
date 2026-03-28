@@ -118,14 +118,14 @@ The parametric ILP framework allows decision-makers to:
 
 Rather than treating diversity as a binary constraint, the model enables systematic exploration of the diversity–popularity trade-off.
 
-# Results
+# 4. Results
 Key findings:
 - Solution composition varies across random seeds but remains structurally consistent.
 - Moderate diversity (around 3-4 topics in the homepage) constraints incur minimal engagement loss while promoting topic diversity.
 
 These results suggest that diversity can be increased strategically without substantial loss in predicted engagement.
 
-# Discussions
+# 5. Discussions
 This study demonstrates the value of integrating machine learning with optimization: enabling policy-aware decision making. 
 
 The framework can be generalized to:
@@ -134,13 +134,13 @@ The framework can be generalized to:
 - Fairness-aware ranking systems
 - Resource allocation problems with diversity constraints
 
-# Limitations
+# 6. Limitations
 - Dataset lacks temporal and personalization features.
 - Predictive model performance is moderate (limited R²).
 - Optimization relies on predicted shares rather than realized engagement.
 - Topic classification is represented via binary indicators rather than hierarchical taxonomy.
 
-# Future Work
+# 7. Future Work
 Future extensions may include:
 1. Robust optimization under predictive uncertainty.
 2. Multi-objective optimization with fairness penalties.
